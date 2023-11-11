@@ -1,4 +1,4 @@
-package domain.entity;
+package github.com.fercodee.domain.entity;
 
 import java.math.BigDecimal;
 
