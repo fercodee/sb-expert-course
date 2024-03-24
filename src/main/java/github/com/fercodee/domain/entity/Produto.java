@@ -1,33 +1,44 @@
 package github.com.fercodee.domain.entity;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "produto")
 public class Produto {
-	private Integer id;
-	private String descricao;
-	private BigDecimal preco;
 
-	public Integer getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "descricao")
+    private String descricao;
 
-	public String getDescricao() {
-		return descricao;
-	}
+    @Column(name = "preco_unitario")
+    private BigDecimal preco;
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public BigDecimal getPreco() {
-		return preco;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
 }

@@ -1,44 +1,79 @@
 package github.com.fercodee.domain.entity;
 
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
+@Table(name = "pedido")
 public class Pedido {
-	private Integer id;
-	private Cliente cliente;
-	private LocalDate dataPedido;
-	private BigDecimal total;
 
-	public Integer getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    @Column(name = "data_pedido")
+    private LocalDate dataPedido;
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+    @Column(name = "total", precision = 20, scale = 2)
+    private BigDecimal total;
 
-	public LocalDate getDataPedido() {
-		return dataPedido;
-	}
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itens;
 
-	public void setDataPedido(LocalDate dataPedido) {
-		this.dataPedido = dataPedido;
-	}
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
 
-	public BigDecimal getTotal() {
-		return total;
-	}
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
 
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public LocalDate getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(LocalDate dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", dataPedido=" + dataPedido +
+                ", total=" + total +
+                '}';
+    }
 }
