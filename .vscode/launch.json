@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-VendasApplication<vendas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "github.com.fercodee.VendasApplication",
+            "projectName": "vendas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
