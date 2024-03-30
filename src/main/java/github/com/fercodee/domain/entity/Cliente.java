@@ -2,6 +2,9 @@ package github.com.fercodee.domain.entity;
 
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 @Entity
@@ -16,6 +19,7 @@ public class Cliente {
     @Column(name = "nome", length = 100)
     private String nome;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "cliente" , fetch = FetchType.LAZY )
     private Set<Pedido> pedidos;
 
