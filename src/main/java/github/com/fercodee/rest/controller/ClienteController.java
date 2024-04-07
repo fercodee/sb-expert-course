@@ -23,29 +23,29 @@ import org.springframework.data.domain.ExampleMatcher;
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
-    private Clientes clientes;
+    private Clientes repository;
 
-    public ClienteController(Clientes clientes) {
-        this.clientes = clientes;
+    public ClienteController(Clientes repository) {
+        this.repository = repository;
     }
 
     @GetMapping("{id}")
     public Cliente fetClienteById(@PathVariable Integer id) {
-        return clientes.findById(id).orElseThrow(() -> new ResponseStatusException(
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente save(@RequestBody Cliente cliente) {
-        return clientes.save(cliente);
+        return repository.save(cliente);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id) {
-        clientes.findById(id).map(cliente -> {
-            clientes.delete(cliente);
+        repository.findById(id).map(cliente -> {
+            repository.delete(cliente);
             return cliente;
         })
                 .orElseThrow(() -> new ResponseStatusException(
@@ -55,11 +55,11 @@ public class ClienteController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Integer id, @RequestBody Cliente cliente) {
-        clientes
+        repository
                 .findById(id)
                 .map(clienteExistente -> {
                     cliente.setId(clienteExistente.getId());
-                    clientes.save(cliente);
+                    repository.save(cliente);
                     return clienteExistente;
                 })
                 .orElseThrow(() -> new ResponseStatusException(
@@ -74,7 +74,7 @@ public class ClienteController {
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
         Example<Cliente> example = Example.of(filtro, matcher);
-        return clientes.findAll(example);
+        return repository.findAll(example);
     }
 
 }
