@@ -3,6 +3,9 @@ package github.com.fercodee.domain.entity;
 
 import javax.persistence.*;
 
+import org.apache.tomcat.jni.Status;
+
+import github.com.fercodee.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,4 +38,8 @@ public class Pedido {
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusPedido status;
 }

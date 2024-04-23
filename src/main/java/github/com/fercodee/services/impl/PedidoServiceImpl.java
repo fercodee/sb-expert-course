@@ -12,6 +12,7 @@ import github.com.fercodee.domain.entity.Cliente;
 import github.com.fercodee.domain.entity.ItemPedido;
 import github.com.fercodee.domain.entity.Pedido;
 import github.com.fercodee.domain.entity.Produto;
+import github.com.fercodee.domain.enums.StatusPedido;
 import github.com.fercodee.domain.repositories.Clientes;
 import github.com.fercodee.domain.repositories.ItemsPedidos;
 import github.com.fercodee.domain.repositories.Pedidos;
@@ -42,6 +43,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(pedidoDTO.getTotal());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemsPedidos = converterItems(pedido, pedidoDTO.getItems());
         pedidosRepository.save(pedido);
