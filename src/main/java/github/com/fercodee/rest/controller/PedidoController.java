@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +18,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import github.com.fercodee.domain.entity.ItemPedido;
 import github.com.fercodee.domain.entity.Pedido;
+import github.com.fercodee.domain.enums.StatusPedido;
+import github.com.fercodee.rest.dto.AtualizacaoStatusPedidoDTO;
 import github.com.fercodee.rest.dto.InformacaoItemPedidoDTO;
 import github.com.fercodee.rest.dto.PedidoDTO;
 import github.com.fercodee.services.PedidoService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -56,6 +61,13 @@ public class PedidoController {
                 .build();
     }
 
+    
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO dto) {
+        service.atualizarStatus(id, StatusPedido.valueOf(dto.getNovoStatus()));   
+    }
+    
     private List<InformacaoItemPedidoDTO> converter(List<ItemPedido> itens) {
         if (itens.isEmpty()) {
             return Collections.emptyList();

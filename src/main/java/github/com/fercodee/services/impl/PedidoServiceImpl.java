@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.hibernate.engine.spi.Status;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import github.com.fercodee.domain.repositories.Clientes;
 import github.com.fercodee.domain.repositories.ItemsPedidos;
 import github.com.fercodee.domain.repositories.Pedidos;
 import github.com.fercodee.domain.repositories.Produtos;
+import github.com.fercodee.exception.PedidoNaoEncontradoException;
 import github.com.fercodee.exception.RegraNegocioException;
 import github.com.fercodee.rest.dto.ItemPedidoDTO;
 import github.com.fercodee.rest.dto.PedidoDTO;
@@ -81,4 +83,19 @@ public class PedidoServiceImpl implements PedidoService {
                 .findByIdFetchItens(id);        
     }
 
+    @Override
+    @Transactional
+    public void atualizarStatus(Integer id, StatusPedido statusPedido) {
+        pedidosRepository.findById(id)
+                .map(pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return pedidosRepository.save(pedido);
+                })
+                .orElseThrow(() -> new PedidoNaoEncontradoException());        
+    }
+
 }
+
+
+// Não é uma boa pratica fazer com que a camada de serviço lance exceções de API rest, 
+// pois a camada de serviço é uma camada de negócio e não de comunicação com o cliente.

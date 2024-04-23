@@ -3,8 +3,6 @@ package github.com.fercodee.domain.entity;
 
 import javax.persistence.*;
 
-import org.apache.tomcat.jni.Status;
-
 import github.com.fercodee.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
