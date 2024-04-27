@@ -2,6 +2,7 @@ package github.com.fercodee.domain.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,6 +25,7 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "nome", length = 100)
+    @NotEmpty(message = "Campo nome é obrigatório.")
     private String nome;
 
     @Column(name = "cpf", length = 11)
