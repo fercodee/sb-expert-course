@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,7 +25,6 @@ import github.com.fercodee.rest.dto.AtualizacaoStatusPedidoDTO;
 import github.com.fercodee.rest.dto.InformacaoItemPedidoDTO;
 import github.com.fercodee.rest.dto.PedidoDTO;
 import github.com.fercodee.services.PedidoService;
-import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
@@ -37,7 +38,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer save(@RequestBody PedidoDTO pedidoDTO) {
+    public Integer save(@RequestBody @Valid PedidoDTO pedidoDTO) {
         Pedido pedido = service.save(pedidoDTO);
         return pedido.getId();
     }
