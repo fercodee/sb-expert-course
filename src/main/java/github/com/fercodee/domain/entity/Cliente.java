@@ -4,6 +4,8 @@ package github.com.fercodee.domain.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -29,6 +31,8 @@ public class Cliente {
     private String nome;
 
     @Column(name = "cpf", length = 11)
+    @NotEmpty(message = "Campo CPF é obrigatório.")
+    @CPF(message = "Informe um CPF válido.") // Hibernate Validator
     private String cpf;
 
     @JsonIgnore
