@@ -39,7 +39,7 @@ public class PedidoServiceImpl implements PedidoService {
         Cliente cliente = clientesRepository
                 .findById(idCliente)
                 .orElseThrow(() -> new RegraNegocioException("Código de Cliente inválido"));
-
+    
         Pedido pedido = new Pedido();
         pedido.setTotal(pedidoDTO.getTotal());
         pedido.setDataPedido(LocalDate.now());
