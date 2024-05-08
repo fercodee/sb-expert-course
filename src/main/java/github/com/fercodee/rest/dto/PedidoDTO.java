@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data // @Getter @Setter @ToString @EqualsAndHashCode
 public class PedidoDTO {
-    @NotNull(message = "Informe o código do cliente.")
+    @NotNull(message = "{campo.codigo-cliente.obrigatorio}")
     private Integer cliente;
     
-    @NotNull(message = "Campo total é obrigatório.")
+    @NotNull(message = "campo.total-pedido.obrigatorio")
     private BigDecimal total;
 
     // @NotEmpty(message = "O pedido deve ter pelo menos um item.") // Hibernate Validator
-    @NotEmptyList(message = "Pedido não pode ser realizado sem itens.")
+    @NotEmptyList(message = "campo.items-pedido.obrigatorio")
     private List<ItemPedidoDTO> items;
 }
