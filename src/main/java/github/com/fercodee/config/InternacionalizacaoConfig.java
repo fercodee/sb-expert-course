@@ -13,7 +13,7 @@ public class InternacionalizacaoConfig {
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:messages"); // classpath (no package) 
+        messageSource.setBasename("classpath:messages"); // classpath (anypackage) 
         messageSource.setDefaultEncoding("ISO-8859-1"); // portugues brazil
         messageSource.setDefaultLocale(Locale.getDefault()); // Get default local
         return messageSource;
